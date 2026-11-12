@@ -23,6 +23,8 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--grn);outli
 .go:active{transform:scale(.98)}
 .guild{display:block;text-align:center;text-decoration:none;background:var(--grn);color:#04130b;margin-top:2px}
 .links{display:flex;gap:10px}
+.langrow{display:flex;justify-content:flex-end}
+.lang{background:var(--panel);border:1px solid var(--line);color:var(--grn);padding:8px 14px;border-radius:5px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:.85rem}
 .links .guild{flex:1;padding:10px 8px;font-size:.88rem;margin-top:0}
 .links .contact{background:var(--yel)}
 .msg{font-size:.85rem;min-height:1.2em;margin:-6px 0 10px}
@@ -46,46 +48,105 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--grn);outli
 </head>
 <body>
 <div class="wrap">
+  <div class="langrow"><button class="lang" id="lang" type="button">EN</button></div>
   <h1 id="logo">HACKEN <span>FF</span></h1>
-  <p class="sub">Machine à sensibilité · Headshot</p>
+  <p class="sub" data-i="sub">Machine à sensibilité · Headshot</p>
 
   <div class="card">
-    <label for="brand">Marque du téléphone</label>
+    <label for="brand" data-i="brand">Marque du téléphone</label>
     <select id="brand"></select>
 
-    <label for="model">Modèle du téléphone</label>
+    <label for="model" data-i="model">Modèle du téléphone</label>
     <select id="model"></select>
 
-    <label for="code">Code d’accès (usage unique)</label>
+    <label for="code" data-i="codeLbl">Code d’accès (usage unique)</label>
     <input id="code" placeholder="HFF-XXXX-XXXX" autocomplete="off" autocapitalize="characters" maxlength="13">
 
     <div class="msg" id="msg"></div>
     <div class="scan" id="scan"><i></i></div>
-    <button class="btn go" id="gen">GÉNÉRER LA SENSIBILITÉ</button>
+    <button class="btn go" id="gen" data-i="gen">GÉNÉRER LA SENSIBILITÉ</button>
   </div>
 
-  <div class="stats"><span>Codes restants : <b id="left">…</b> / 1000</span><span>Chaque code expire après usage</span></div>
+  <div class="stats"><span><span data-i="leftLbl">Codes restants</span> : <b id="left">…</b> / 1000</span><span data-i="expires">Chaque code expire après usage</span></div>
 
   <div class="card" id="res" style="border-left-color:var(--grn)">
     <div class="head" id="rtitle"></div>
     <div id="rows"></div>
-    <p class="note">Valeurs de départ tirées de guides Free Fire 2026 (échelle 0–100). Aucun réglage ne garantit le headshot : teste en Training Ground et ajuste de 2 à 5 points. Si la visée tremble, baisse Général et Point rouge de 5.</p>
+    <p class="note" data-i="note">Valeurs de départ tirées de guides Free Fire 2026 (échelle 0–100). Aucun réglage ne garantit le headshot : teste en Training Ground et ajuste de 2 à 5 points. Si la visée tremble, baisse Général et Point rouge de 5.</p>
   </div>
 
   <div class="links">
-    <a class="btn guild" href="https://chat.whatsapp.com/EkJpYtLCOdI57sTvdGC5nf?s=cl&p=a&iam=2" target="_blank" rel="noopener">Guilde des Congolais</a>
-    <a class="btn guild contact" href="https://wa.me/243971160692" target="_blank" rel="noopener">Me contacter</a>
+    <a class="btn guild" href="https://chat.whatsapp.com/EkJpYtLCOdI57sTvdGC5nf?s=cl&p=a&iam=2" target="_blank" rel="noopener" data-i="guild">Guilde des Congolais</a>
+    <a class="btn guild contact" href="https://wa.me/243971160692" target="_blank" rel="noopener" data-i="contact">Me contacter</a>
   </div>
 
   <div class="card" id="admin" style="margin-top:14px">
-    <div class="head">Admin · 1000 codes</div>
+    <div class="head" data-i="adminHead">Admin · 1000 codes</div>
     <textarea id="codes" readonly></textarea>
-    <button class="btn go" id="copy" style="margin-top:10px">Copier les codes</button>
-    <button class="btn" id="reset" style="margin-top:8px;background:#232a3a;color:var(--txt)">Régénérer 1000 nouveaux codes</button>
-    <p class="note">Un code utilisé est supprimé pour tout le monde. Quand il n’en reste plus, appuie sur « Régénérer » : les nouveaux codes sont actifs partout. Copie-les tout de suite, ils ne sont affichés qu’une fois.</p>
+    <button class="btn go" id="copy" data-i="copy" style="margin-top:10px">Copier les codes</button>
+    <button class="btn" id="reset" data-i="reset" style="margin-top:8px;background:#232a3a;color:var(--txt)">Régénérer 1000 nouveaux codes</button>
+    <p class="note" data-i="adminNote">Un code utilisé est supprimé pour tout le monde. Quand il n’en reste plus, appuie sur « Régénérer » : les nouveaux codes sont actifs partout. Copie-les tout de suite, ils ne sont affichés qu’une fois.</p>
   </div>
 </div>
 
+<script>
+const I18N={
+fr:{
+title:"HACKEN FF – Générateur de sensibilité",
+sub:"Machine à sensibilité · Headshot",
+brand:"Marque du téléphone",model:"Modèle du téléphone",codeLbl:"Code d’accès (usage unique)",
+gen:"GÉNÉRER LA SENSIBILITÉ",analyzing:"ANALYSE EN COURS…",
+leftLbl:"Codes restants",expires:"Chaque code expire après usage",
+note:"Valeurs de départ tirées de guides Free Fire 2026 (échelle 0–100). Aucun réglage ne garantit le headshot : teste en Training Ground et ajuste de 2 à 5 points. Si la visée tremble, baisse Général et Point rouge de 5.",
+guild:"Guilde des Congolais",contact:"Me contacter",
+adminHead:"Admin · 1000 codes",copy:"Copier les codes",reset:"Régénérer 1000 nouveaux codes",generating:"Génération…",
+adminNote:"Un code utilisé est supprimé pour tout le monde. Quand il n’en reste plus, appuie sur « Régénérer » : les nouveaux codes sont actifs partout. Copie-les tout de suite, ils ne sont affichés qu’une fois.",
+other:"Autre modèle",otherBrand:"Autre",
+accepted:"Code accepté. Il est maintenant expiré.",
+badCode:"Code expiré ou incorrect. Appuie sur le bouton « Me contacter » pour demander ton code à usage unique.",
+soldOut:"Tous les codes sont épuisés. Appuie sur le bouton « Me contacter » pour demander ton code à usage unique.",
+notConn:"Le site n’est pas encore connecté à la base de données.",connFail:"Connexion impossible. Réessaie.",
+r0:"Général",r1:"Point rouge",r2:"Lunette 2x",r3:"Lunette 4x",r4:"Lunette AWM",r5:"Regard (caméra)",
+dpiTitle:"DPI (Plus petite largeur)",
+dpiAndroid:"Android : Paramètres → Options pour développeurs → « Plus petite largeur ». Valeur à tester : monte par pas de 40 si ça ne te convient pas. Si les textes deviennent trop petits ou si l’écran bug, remets la valeur d’origine.",
+dpiIos:"Le DPI ne se change pas sur iPhone : utilise seulement les sensibilités ci-dessus.",
+pwd:"Mot de passe admin",
+codesHint:"Les codes s’affichent ici seulement au moment de la génération. Appuie sur « Régénérer » pour en créer 1000 nouveaux.",
+noDb:"Colle d’abord l’URL Firebase dans le fichier (ligne DB).",
+confirmGen:"Générer 1000 nouveaux codes pour tout le monde ? Les anciens codes restants seront supprimés.",
+genDone:"1000 nouveaux codes actifs chez tout le monde. Copie-les maintenant : ils ne seront plus affichés après.",
+genFail:"Échec : vérifie l’URL Firebase et les règles de la base."
+},
+en:{
+title:"HACKEN FF – Sensitivity Generator",
+sub:"Sensitivity machine · Headshot",
+brand:"Phone brand",model:"Phone model",codeLbl:"Access code (single use)",
+gen:"GENERATE SENSITIVITY",analyzing:"ANALYZING…",
+leftLbl:"Codes left",expires:"Each code expires after use",
+note:"Starting values taken from 2026 Free Fire guides (0–100 scale). No setting guarantees headshots: test in Training Ground and adjust by 2 to 5 points. If your aim shakes, lower General and Red Dot by 5.",
+guild:"Congolese Guild",contact:"Contact me",
+adminHead:"Admin · 1000 codes",copy:"Copy codes",reset:"Regenerate 1000 new codes",generating:"Generating…",
+adminNote:"A used code is deleted for everyone. When none are left, press “Regenerate”: the new codes are active everywhere. Copy them right away, they are only shown once.",
+other:"Other model",otherBrand:"Other",
+accepted:"Code accepted. It is now expired.",
+badCode:"Code expired or incorrect. Press the “Contact me” button to request your single-use code.",
+soldOut:"All codes are used up. Press the “Contact me” button to request your single-use code.",
+notConn:"The site is not connected to the database yet.",connFail:"Connection failed. Please try again.",
+r0:"General",r1:"Red Dot",r2:"2x Scope",r3:"4x Scope",r4:"AWM Scope",r5:"Free Look",
+dpiTitle:"DPI (Smallest width)",
+dpiAndroid:"Android: Settings → Developer options → “Smallest width”. Value to test: raise it in steps of 40 if it doesn't suit you. If text gets too small or the screen glitches, restore the original value.",
+dpiIos:"DPI can't be changed on iPhone: use the sensitivities above only.",
+pwd:"Admin password",
+codesHint:"Codes are only shown here at the moment they are generated. Press “Regenerate” to create 1000 new ones.",
+noDb:"First paste the Firebase URL in the file (DB line).",
+confirmGen:"Generate 1000 new codes for everyone? The remaining old codes will be deleted.",
+genDone:"1000 new codes are now active for everyone. Copy them now: they won't be shown again.",
+genFail:"Failed: check the Firebase URL and the database rules."
+}};
+let LANG="fr";
+try{const s=localStorage.getItem('hff_lang');if(s==="fr"||s==="en")LANG=s}catch(e){}
+function t(k){return (I18N[LANG]&&I18N[LANG][k])||I18N.fr[k]||k}
+</script>
 <script>
 const BRANDS=["Samsung","Xiaomi","Redmi","Poco","Tecno","Infinix","Itel","Oppo","Realme","Vivo","Huawei","Honor","iPhone","Google Pixel","OnePlus","Motorola","Nokia","Asus ROG","Lenovo","Autre"];
 const bs=document.getElementById('brand');
@@ -152,7 +213,7 @@ for(const k of Object.keys(EXTRA)) MODELS[k]=[...new Set([...(MODELS[k]||[]),...
 function fillModels(){
   ms.innerHTML="";
   (MODELS[bs.value]||[]).forEach(m=>ms.add(new Option(m,m)));
-  ms.add(new Option("Autre modèle","Autre modèle"));
+  ms.add(new Option(t('other'),"Autre modèle"));
 }
 bs.onchange=fillModels;fillModels();
 
@@ -181,47 +242,71 @@ function make(brand,model){
   const tier=score<=-2?0:score>=4?2:1;
   // Valeurs de départ (échelle 0-100) issues de guides Free Fire 2026, par type de téléphone
   const T=[[97,95,88,77,43,86],[95,92,84,74,40,82],[99,96,86,77,38,87]][tier];
-  const N=["Général","Point rouge","Lunette 2x","Lunette 4x","Lunette AWM","Regard (caméra)"];
-  const rows=T.map((b,i)=>[N[i],Math.max(1,Math.min(100,b+Math.round((r()-.5)*4)))]);
+  const rows=T.map((b,i)=>[i,Math.max(1,Math.min(100,b+Math.round((r()-.5)*4)))]);
   const dpi=brand==="iPhone"?null:[400,440,480][tier];
   return {rows,dpi,tier};
 }
 function msg(t,c){const m=document.getElementById('msg');m.textContent=t;m.className='msg '+(c||'')}
 
+let LAST=null,HINT=false;
+function renderResult(){
+  const {brand,model,R}=LAST;
+  document.getElementById('rtitle').textContent=brand+" "+model;
+  const rows=document.getElementById('rows');rows.innerHTML="";
+  R.rows.forEach(([i,val])=>{
+    const d=document.createElement('div');d.className='row';
+    d.innerHTML='<div class="top"><span>'+t('r'+i)+'</span><b>'+val+'</b></div><div class="bar"><i></i></div>';
+    rows.appendChild(d);
+    setTimeout(()=>d.querySelector('i').style.width=val+'%',50);
+  });
+  const dd=document.createElement('div');dd.className='row';
+  dd.innerHTML='<div class="top"><span>'+t('dpiTitle')+'</span><b>'+(R.dpi?R.dpi:'—')+'</b></div><div class="note" style="margin:0">'+(R.dpi?t('dpiAndroid'):t('dpiIos'))+'</div>';
+  rows.appendChild(dd);
+}
+
+function applyLang(){
+  document.documentElement.lang=LANG;
+  document.title=t('title');
+  document.querySelectorAll('[data-i]').forEach(e=>{e.textContent=t(e.dataset.i)});
+  document.getElementById('lang').textContent=LANG==='fr'?'EN':'FR';
+  for(const o of bs.options) if(o.value==="Autre") o.textContent=t('otherBrand');
+  const last=ms.options[ms.options.length-1];
+  if(last&&last.value==="Autre modèle") last.textContent=t('other');
+  if(HINT) document.getElementById('codes').value=t('codesHint');
+  if(LAST) renderResult();
+}
+document.getElementById('lang').onclick=()=>{
+  LANG=LANG==='fr'?'en':'fr';
+  try{localStorage.setItem('hff_lang',LANG)}catch(e){}
+  msg("");
+  applyLang();
+};
+
 document.getElementById('gen').onclick=async()=>{
   const code=document.getElementById('code').value.trim().toUpperCase();
   const brand=bs.value,model=ms.value;
   document.getElementById('res').style.display='none';
-  if(!ready()) return msg("Le site n’est pas encore connecté à la base de données.","err");
+  if(!ready()) return msg(t('notConn'),"err");
   try{
     const h=await sha(code);
     if(!(await api("/codes/"+h))){
       await refresh();
-      return msg(LEFT===0?"Tous les codes sont épuisés. L’admin doit en régénérer.":"Code incorrect ou expiré (déjà utilisé).","err");
+      return msg(LEFT===0?t('soldOut'):t('badCode'),"err");
     }
     await api("/codes/"+h,"DELETE");
-  }catch(e){return msg("Connexion impossible. Réessaie.","err")}
+  }catch(e){return msg(t('connFail'),"err")}
   msg("");
   const sc=document.getElementById('scan'),bar=sc.firstElementChild;
   sc.style.display='block';bar.style.transition='none';bar.style.width='0';
   requestAnimationFrame(()=>{bar.style.transition='width 1.8s linear';bar.style.width='100%'});
-  const btn=document.getElementById('gen');btn.disabled=true;btn.textContent="ANALYSE EN COURS…";
+  const btn=document.getElementById('gen');btn.disabled=true;btn.textContent=t('analyzing');
   setTimeout(()=>{
     refresh();
-    sc.style.display='none';btn.disabled=false;btn.textContent="GÉNÉRER LA SENSIBILITÉ";
+    sc.style.display='none';btn.disabled=false;btn.textContent=t('gen');
     document.getElementById('code').value="";
-    msg("Code accepté. Il est maintenant expiré.","ok");
-    document.getElementById('rtitle').textContent=brand+" "+model;
-    const rows=document.getElementById('rows');rows.innerHTML="";
-    const R=make(brand,model);R.rows.forEach(([n,val])=>{
-      const d=document.createElement('div');d.className='row';
-      d.innerHTML='<div class="top"><span>'+n+'</span><b>'+val+'</b></div><div class="bar"><i></i></div>';
-      rows.appendChild(d);
-      setTimeout(()=>d.querySelector('i').style.width=val+'%',50);
-    });
-    const dd=document.createElement('div');dd.className='row';
-    dd.innerHTML='<div class="top"><span>DPI (Plus petite largeur)</span><b>'+(R.dpi?R.dpi:'—')+'</b></div><div class="note" style="margin:0">'+(R.dpi?'Android : Paramètres → Options pour développeurs → « Plus petite largeur ». Valeur à tester : monte par pas de 40 si ça ne te convient pas. Si les textes deviennent trop petits ou si l’écran bug, remets la valeur d’origine.':'Le DPI ne se change pas sur iPhone : utilise seulement les sensibilités ci-dessus.')+'</div>';
-    rows.appendChild(dd);
+    msg(t('accepted'),"ok");
+    LAST={brand,model,R:make(brand,model)};
+    renderResult();
     document.getElementById('res').style.display='block';
     document.getElementById('res').scrollIntoView({behavior:'smooth'});
   },1900);
@@ -231,26 +316,28 @@ document.getElementById('gen').onclick=async()=>{
 let taps=0,tt;
 document.getElementById('logo').onclick=()=>{
   taps++;clearTimeout(tt);tt=setTimeout(()=>taps=0,1500);
-  if(taps>=5){taps=0;const p=prompt("Mot de passe admin");if(p==="congo2026"){
+  if(taps>=5){taps=0;const p=prompt(t('pwd'));if(p==="congo2026"){
     const a=document.getElementById('admin');a.style.display='block';
-    document.getElementById('codes').value="Les codes s’affichent ici seulement au moment de la génération. Appuie sur « Régénérer » pour en créer 1000 nouveaux.";
+    HINT=true;document.getElementById('codes').value=t('codesHint');
     a.scrollIntoView({behavior:'smooth'})}}
 };
-document.getElementById('copy').onclick=()=>{const t=document.getElementById('codes');t.select();try{document.execCommand('copy')}catch(e){}};
+document.getElementById('copy').onclick=()=>{const x=document.getElementById('codes');x.select();try{document.execCommand('copy')}catch(e){}};
 document.getElementById('reset').onclick=async()=>{
-  if(!ready()) return alert("Colle d’abord l’URL Firebase dans le fichier (ligne DB).");
-  if(!confirm("Générer 1000 nouveaux codes pour tout le monde ? Les anciens codes restants seront supprimés.")) return;
-  const btn=document.getElementById('reset');btn.disabled=true;btn.textContent="Génération…";
+  if(!ready()) return alert(t('noDb'));
+  if(!confirm(t('confirmGen'))) return;
+  const btn=document.getElementById('reset');btn.disabled=true;btn.textContent=t('generating');
   try{
     const list=genCodes(),obj={};
     for(const c of list) obj[await sha(c)]=true;
     await api("/codes","PUT",obj);
-    document.getElementById('codes').value=list.join("\n");
+    HINT=false;document.getElementById('codes').value=list.join("\n");
     await refresh();
-    alert("1000 nouveaux codes actifs chez tout le monde. Copie-les maintenant : ils ne seront plus affichés après.");
-  }catch(e){alert("Échec : vérifie l’URL Firebase et les règles de la base.")}
-  btn.disabled=false;btn.textContent="Régénérer 1000 nouveaux codes";
+    alert(t('genDone'));
+  }catch(e){alert(t('genFail'))}
+  btn.disabled=false;btn.textContent=t('reset');
 };
+
+applyLang();
 </script>
 </body>
 </html>
