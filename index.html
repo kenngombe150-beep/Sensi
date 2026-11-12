@@ -69,7 +69,7 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--grn);outli
   <div class="card" id="res" style="border-left-color:var(--grn)">
     <div class="head" id="rtitle"></div>
     <div id="rows"></div>
-    <p class="note">Ce sont des réglages recommandés pour viser la tête. Ajuste de 2 à 5 points selon ton écran et ta main, et teste en entraînement.</p>
+    <p class="note">Valeurs de départ tirées de guides Free Fire 2026 (échelle 0–100). Aucun réglage ne garantit le headshot : teste en Training Ground et ajuste de 2 à 5 points. Si la visée tremble, baisse Général et Point rouge de 5.</p>
   </div>
 
   <div class="links">
@@ -177,12 +177,14 @@ function make(brand,model){
   const r=rng(hash(brand+"|"+model));
   const hi=/S2\d|Note 20|Fold|Flip|Pro|Max|Pixel [6-9]|iPhone 1[3-6]|ROG|Legion|GT|Black Shark|Find|X\d0|Mate|P[456]0/i.test(model);
   const lo=/A0\d|A1[0-3]|C\d\d|Hot [89]|Smart|Spark [5-8]|Go|J\d|Redmi [89]A?|Itel|Nokia|Moto E/i.test(model)||brand==="Itel";
-  const adj=(SCREEN[brand]||NEWADJ[brand]||0)+(hi?2:0)-(lo?2:0);
-  const v=(base,spread)=>Math.max(1,Math.min(100,Math.round(base+adj+(r()-.5)*spread*2)));
-  return [
-    ["Général",v(92,4)],["Point rouge",v(90,5)],["Lunette 2x",v(86,5)],
-    ["Lunette 4x",v(82,6)],["Lunette AWM",v(48,8)],["Regard (caméra)",v(94,3)]
-  ];
+  const score=(SCREEN[brand]||NEWADJ[brand]||0)+(hi?2:0)-(lo?2:0);
+  const tier=score<=-2?0:score>=4?2:1;
+  // Valeurs de départ (échelle 0-100) issues de guides Free Fire 2026, par type de téléphone
+  const T=[[97,95,88,77,43,86],[95,92,84,74,40,82],[99,96,86,77,38,87]][tier];
+  const N=["Général","Point rouge","Lunette 2x","Lunette 4x","Lunette AWM","Regard (caméra)"];
+  const rows=T.map((b,i)=>[N[i],Math.max(1,Math.min(100,b+Math.round((r()-.5)*4)))]);
+  const dpi=brand==="iPhone"?null:[400,440,480][tier];
+  return {rows,dpi,tier};
 }
 function msg(t,c){const m=document.getElementById('msg');m.textContent=t;m.className='msg '+(c||'')}
 
@@ -211,12 +213,15 @@ document.getElementById('gen').onclick=async()=>{
     msg("Code accepté. Il est maintenant expiré.","ok");
     document.getElementById('rtitle').textContent=brand+" "+model;
     const rows=document.getElementById('rows');rows.innerHTML="";
-    make(brand,model).forEach(([n,val])=>{
+    const R=make(brand,model);R.rows.forEach(([n,val])=>{
       const d=document.createElement('div');d.className='row';
       d.innerHTML='<div class="top"><span>'+n+'</span><b>'+val+'</b></div><div class="bar"><i></i></div>';
       rows.appendChild(d);
       setTimeout(()=>d.querySelector('i').style.width=val+'%',50);
     });
+    const dd=document.createElement('div');dd.className='row';
+    dd.innerHTML='<div class="top"><span>DPI (Plus petite largeur)</span><b>'+(R.dpi?R.dpi:'—')+'</b></div><div class="note" style="margin:0">'+(R.dpi?'Android : Paramètres → Options pour développeurs → « Plus petite largeur ». Valeur à tester : monte par pas de 40 si ça ne te convient pas. Si les textes deviennent trop petits ou si l’écran bug, remets la valeur d’origine.':'Le DPI ne se change pas sur iPhone : utilise seulement les sensibilités ci-dessus.')+'</div>';
+    rows.appendChild(dd);
     document.getElementById('res').style.display='block';
     document.getElementById('res').scrollIntoView({behavior:'smooth'});
   },1900);
