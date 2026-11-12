@@ -50,9 +50,6 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--grn);outli
   <p class="sub">Machine à sensibilité · Headshot</p>
 
   <div class="card">
-    <label for="uid">ID Free Fire</label>
-    <input id="uid" inputmode="numeric" placeholder="Ex : 123456789" maxlength="12" autocomplete="off">
-
     <label for="brand">Marque du téléphone</label>
     <select id="brand"></select>
 
@@ -76,7 +73,7 @@ input:focus,select:focus,button:focus-visible{outline:2px solid var(--grn);outli
   </div>
 
   <div class="links">
-    <a class="btn guild" href="https://chat.whatsapp.com/JaE8ZhynF7eGv1UqfKJY2t?s=cl&p=a&iam=2" target="_blank" rel="noopener">Guilde des Congolais</a>
+    <a class="btn guild" href="https://chat.whatsapp.com/EkJpYtLCOdI57sTvdGC5nf?s=cl&p=a&iam=2" target="_blank" rel="noopener">Guilde des Congolais</a>
     <a class="btn guild contact" href="https://wa.me/243971160692" target="_blank" rel="noopener">Me contacter</a>
   </div>
 
@@ -116,6 +113,42 @@ const MODELS={
 "Lenovo":["Lenovo K10","Lenovo K13","Lenovo Legion","Lenovo Tab"],
 "Autre":[]
 };
+const X=s=>s.split("|");
+const EXTRA={
+"Samsung":X("Galaxy A01|Galaxy A01 Core|Galaxy A02|Galaxy A02s|Galaxy A03 Core|Galaxy A03s|Galaxy A04e|Galaxy A04s|Galaxy A06|Galaxy A11|Galaxy A13 5G|Galaxy A14 5G|Galaxy A16|Galaxy A17|Galaxy A22 5G|Galaxy A32 5G|Galaxy A40|Galaxy A42|Galaxy A60|Galaxy A80|Galaxy A9 2018|Galaxy M01|Galaxy M02|Galaxy M10|Galaxy M11|Galaxy M20|Galaxy M30s|Galaxy M33|Galaxy M34|Galaxy M53|Galaxy J1|Galaxy J3|Galaxy J4|Galaxy J5|Galaxy J6|Galaxy J8|Galaxy S6|Galaxy S7|Galaxy S8|Galaxy S10 Lite|Galaxy S20 FE|Galaxy S21 FE|Galaxy S23 FE|Galaxy Grand Prime|Galaxy Core Prime|Galaxy Note 5|Galaxy Note 8|Galaxy E5"),
+"Xiaomi":X("Mi 4|Mi 5|Mi 6|Mi 8 Lite|Mi 9T|Mi 10T|Mi 11 Lite|Mi Note 10|Xiaomi 11T|Xiaomi 12T|Xiaomi 13T|Xiaomi 14T|Xiaomi 15|Xiaomi Civi"),
+"Redmi":X("Redmi 5|Redmi 6|Redmi 6A|Redmi 7|Redmi 7A|Redmi 8A|Redmi 9T|Redmi 9 Power|Redmi 10A|Redmi 10 5G|Redmi 11 Prime|Redmi 12 5G|Redmi 13|Redmi A1|Redmi A2|Redmi A3|Redmi A5|Redmi Go|Redmi K40|Redmi K50|Redmi Note 5|Redmi Note 6|Redmi Note 7|Redmi Note 8 Pro|Redmi Note 9 Pro|Redmi Note 10 Pro|Redmi Note 11 Pro|Redmi Note 12 Pro|Redmi Note 13 Pro|Redmi Note 14 Pro"),
+"Poco":X("Poco C50|Poco C51|Poco C55|Poco C61|Poco C71|Poco M2|Poco M3 Pro|Poco M4|Poco M5s|Poco M6 Pro|Poco X3|Poco X3 NFC|Poco X4 GT|Poco X5 Pro|Poco X6 Pro|Poco F1|Poco F2 Pro|Poco F4 GT|Poco F6 Pro"),
+"Tecno":X("Spark 4|Spark 4 Air|Spark 11|Spark 20C|Spark 20 Pro|Spark 30|Spark Go 2023|Spark Go 2024|Spark 10C|Spark 10 Pro|Pop 5|Pop 6|Pop 7|Pop 8|Pop 9|Camon 12|Camon 16 Premier|Camon 17 Pro|Camon 18 Premier|Camon 19 Neo|Camon 20 Pro|Camon 30 Pro|Camon 40|Pova Neo|Pova Neo 2|Pova Neo 3|Pova 5 Pro|Pova 6 Pro|Pova 7|Phantom X2|Phantom X2 Pro|Phantom V Fold|Phantom V Flip|Pouvoir 3|Pouvoir 4|Tecno W3|Tecno F2|Tecno KB"),
+"Infinix":X("Hot 6|Hot 7|Hot 8 Lite|Hot 9 Play|Hot 10 Lite|Hot 10 Play|Hot 10S|Hot 11 Play|Hot 11S|Hot 12 Play|Hot 12i|Hot 30 Play|Hot 30i|Hot 40 Pro|Hot 40i|Hot 50|Hot 50 Pro|Note 5|Note 6|Note 7 Lite|Note 10 Pro|Note 11 Pro|Note 11s|Note 12 Pro|Note 12 G96|Note 30 Pro|Note 40 Pro|Note 50|Smart 4|Smart 4 Plus|Smart HD|Smart 7 HD|Smart 8 HD|Smart 9|Smart 9 HD|Zero 5|Zero 8|Zero Ultra|Zero 40|GT 10 Pro|GT 20 Pro|Zero X Pro"),
+"Itel":X("A16|A17|A18|A25|A26|A27|A33|A37|A47|A52|A55|A57|A60s|A62|A70|A71|P17|P32|P33|P38|P55|P55+|P65|S17|S23+|S24|Vision 2|Vision 2S|Vision 3 Plus|Power 70|it2160|it5606|it5600|it5081"),
+"Oppo":X("A1k|A3s|A5|A5s|A9|A12|A15s|A16K|A16e|A18|A38|A53|A55|A57s|A60|A77|A79|F9|F11|F15|F17|F19|F21 Pro|Reno 2|Reno 3|Reno 4|Reno 12|Find X2|Find X6"),
+"Realme":X("Realme C1|Realme C2|Realme C3|Realme C12|Realme C17|Realme C20|Realme C30|Realme C31|Realme C33|Realme C51|Realme C61|Realme C63|Realme C65|Realme C67|Realme 5|Realme 5i|Realme 6|Realme 6i|Realme 7i|Realme 8i|Realme 9i|Realme 10 Pro|Realme 11 Pro|Realme 12 Pro|Realme 13|Realme Narzo 20|Realme Narzo 30|Realme Narzo 50|Realme Narzo 60|Realme X|Realme XT|Realme X2|Realme GT 2|Realme GT 5|Realme Note 50"),
+"Vivo":X("Y01|Y02|Y03|Y11|Y17|Y19|Y30|Y33s|Y35|Y51|Y53s|Y55|Y71|Y81|Y91|Y93|Y95|Y100|V9|V11|V15|V17|V19|V21e|V25e|V29e|V40|S1|T1|T2|iQOO Z6|iQOO Neo|iQOO 9"),
+"Huawei":X("Y5|Y5p|Y6p|Y6s|Y7a|Y7p|Y7 Prime|Y8p|Y9s|Y9a|Nova 3|Nova 3i|Nova 4|Nova 5T|Nova 8|Nova 10|Nova Y60|Nova Y70|Nova Y90|Mate 10|Mate 50|Mate X|P8 Lite|P10|P Smart|P Smart 2019|Enjoy 10"),
+"Honor":X("Honor 7A|Honor 8A|Honor 9A|Honor 9 Lite|Honor 10 Lite|Honor 20 Lite|Honor 30|Honor X5|Honor X6|Honor X6a|Honor X7a|Honor X8a|Honor X9a|Honor X9b|Honor 90|Honor 200|Honor Play"),
+"Motorola":X("Moto G Play|Moto G Power|Moto G Stylus|Moto G4|Moto G5|Moto G6|Moto G22|Moto G23|Moto G32|Moto G42|Moto G52|Moto G62|Moto G73|Moto G84|Moto E6|Moto E20|Moto E22|Moto E32|Moto E40|Moto Z|Moto X|Razr"),
+"Nokia":X("Nokia 1|Nokia 2|Nokia 3|Nokia 5|Nokia 6|Nokia 7|Nokia 8|Nokia 1.3|Nokia 2.3|Nokia 3.1|Nokia 5.3|Nokia 6.1|Nokia 7.2|Nokia C01|Nokia C1|Nokia C2|Nokia C10|Nokia C12|Nokia C20|Nokia C30|Nokia C31|Nokia G11|Nokia G21|Nokia G22|Nokia G42|Nokia X10"),
+"Lenovo":X("Lenovo A5|Lenovo K5|Lenovo K8|Lenovo K9|Lenovo Z5|Lenovo Z6|Lenovo Vibe|Lenovo Phab|Lenovo S5"),
+"iPhone":X("iPhone 5|iPhone 5s|iPhone 6s|iPhone 6 Plus|iPhone 7 Plus|iPhone 8 Plus|iPhone XS Max|iPhone 11 Pro|iPhone 12 mini|iPhone 12 Pro|iPhone 13 mini|iPhone 13 Pro|iPhone 14 Plus|iPhone 14 Pro|iPhone 15 Plus|iPhone 15 Pro|iPhone 16 Pro|iPhone 17"),
+"Google Pixel":X("Pixel 3a|Pixel 4a|Pixel 5a|Pixel 6a|Pixel 7a|Pixel 8a|Pixel Fold"),
+"OnePlus":X("OnePlus 5|OnePlus 6T|OnePlus 7T|OnePlus 8T|OnePlus 9R|OnePlus Nord 2|OnePlus Nord CE|OnePlus Nord N10|OnePlus Nord N20|OnePlus 13|OnePlus Ace"),
+"Asus ROG":X("ROG Phone|ROG Phone 9|Zenfone 5|Zenfone 6|Zenfone 8|Zenfone 9|Zenfone 10|Zenfone Max Pro M1|Zenfone Max M2|Zenfone Live"),
+"Alcatel":X("Alcatel 1|Alcatel 1B|Alcatel 1S|Alcatel 1SE|Alcatel 1V|Alcatel 3|Alcatel 3L|Alcatel 3T|Alcatel 3X|Alcatel Pixi|Alcatel Pop|Alcatel Idol"),
+"Wiko":X("Wiko Y60|Wiko Y61|Wiko Y62|Wiko Y81|Wiko T3|Wiko T10|Wiko T50|Wiko T60|Wiko Power U10|Wiko Power U20|Wiko Power U30|Wiko View 2|Wiko View 3|Wiko Lenny|Wiko Jerry|Wiko Sunny|Wiko Harry|Wiko Tommy|Wiko Fever|Wiko Rainbow"),
+"ZTE":X("Blade A5|Blade A7|Blade A31|Blade A51|Blade A52|Blade L8|Blade V10|Blade V30|Blade V40|Axon 10|Axon 20|Axon 30|Axon 40"),
+"Sony":X("Xperia Z|Xperia Z3|Xperia Z5|Xperia XA|Xperia XZ|Xperia L1|Xperia 1|Xperia 5|Xperia 10|Xperia 10 III"),
+"LG":X("LG G5|LG G6|LG G7|LG G8|LG V30|LG V40|LG K10|LG K20|LG K40|LG K50|LG Q6|LG Q60|LG Velvet|LG Wing"),
+"HTC":X("HTC Desire 10|HTC Desire 12|HTC Desire 20|HTC U11|HTC U12|HTC One M8|HTC One M9"),
+"Umidigi":X("Umidigi A3|Umidigi A5 Pro|Umidigi A7|Umidigi A9|Umidigi A11|Umidigi Bison|Umidigi Power 5|Umidigi Power 7|Umidigi F2|Umidigi G1|Umidigi C2"),
+"Doogee":X("Doogee X5|Doogee X10|Doogee X90|Doogee N20|Doogee N30|Doogee S58|Doogee S61|Doogee S88|Doogee S98|Doogee Y8|Doogee Y9"),
+"Blackview":X("Blackview A52|Blackview A55|Blackview A80|Blackview A95|Blackview BV5100|Blackview BV6300|Blackview BV7100|Blackview BV9500|Blackview BV9900|Oscal"),
+"Nubia":X("Nubia Z17|Nubia Z50|Red Magic 5|Red Magic 6|Red Magic 7|Red Magic 8|Red Magic 9")
+};
+const NEWB=["Alcatel","Wiko","ZTE","Sony","LG","HTC","Umidigi","Doogee","Blackview","Nubia"];
+const NEWADJ={Alcatel:-4,Wiko:-3,ZTE:-3,Sony:2,LG:0,HTC:0,Umidigi:-3,Doogee:-3,Blackview:-3,Nubia:3};
+NEWB.forEach(b=>bs.add(new Option(b,b),bs.options[bs.options.length-1]));
+for(const k of Object.keys(EXTRA)) MODELS[k]=[...new Set([...(MODELS[k]||[]),...EXTRA[k]])].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
 function fillModels(){
   ms.innerHTML="";
   (MODELS[bs.value]||[]).forEach(m=>ms.add(new Option(m,m)));
@@ -140,11 +173,11 @@ refresh();
 function hash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
 const SCREEN={"iPhone":6,"Samsung":3,"Google Pixel":3,"OnePlus":3,"Asus ROG":4,"Xiaomi":1,"Redmi":0,"Poco":2,"Tecno":-3,"Infinix":-3,"Itel":-5,"Oppo":0,"Realme":0,"Vivo":0,"Huawei":-1,"Honor":0,"Motorola":-2,"Nokia":-4,"Lenovo":-1,"Autre":0};
 
-function make(uid,brand,model){
-  const r=rng(hash(uid+"|"+brand+"|"+model));
+function make(brand,model){
+  const r=rng(hash(brand+"|"+model));
   const hi=/S2\d|Note 20|Fold|Flip|Pro|Max|Pixel [6-9]|iPhone 1[3-6]|ROG|Legion|GT|Black Shark|Find|X\d0|Mate|P[456]0/i.test(model);
   const lo=/A0\d|A1[0-3]|C\d\d|Hot [89]|Smart|Spark [5-8]|Go|J\d|Redmi [89]A?|Itel|Nokia|Moto E/i.test(model)||brand==="Itel";
-  const adj=(SCREEN[brand]||0)+(hi?2:0)-(lo?2:0);
+  const adj=(SCREEN[brand]||NEWADJ[brand]||0)+(hi?2:0)-(lo?2:0);
   const v=(base,spread)=>Math.max(1,Math.min(100,Math.round(base+adj+(r()-.5)*spread*2)));
   return [
     ["Général",v(92,4)],["Point rouge",v(90,5)],["Lunette 2x",v(86,5)],
@@ -154,11 +187,9 @@ function make(uid,brand,model){
 function msg(t,c){const m=document.getElementById('msg');m.textContent=t;m.className='msg '+(c||'')}
 
 document.getElementById('gen').onclick=async()=>{
-  const uid=document.getElementById('uid').value.trim();
   const code=document.getElementById('code').value.trim().toUpperCase();
   const brand=bs.value,model=ms.value;
   document.getElementById('res').style.display='none';
-  if(!/^\d{6,12}$/.test(uid)) return msg("ID invalide : 6 à 12 chiffres.","err");
   if(!ready()) return msg("Le site n’est pas encore connecté à la base de données.","err");
   try{
     const h=await sha(code);
@@ -178,9 +209,9 @@ document.getElementById('gen').onclick=async()=>{
     sc.style.display='none';btn.disabled=false;btn.textContent="GÉNÉRER LA SENSIBILITÉ";
     document.getElementById('code').value="";
     msg("Code accepté. Il est maintenant expiré.","ok");
-    document.getElementById('rtitle').textContent="ID "+uid+" · "+brand+" "+model;
+    document.getElementById('rtitle').textContent=brand+" "+model;
     const rows=document.getElementById('rows');rows.innerHTML="";
-    make(uid,brand,model).forEach(([n,val])=>{
+    make(brand,model).forEach(([n,val])=>{
       const d=document.createElement('div');d.className='row';
       d.innerHTML='<div class="top"><span>'+n+'</span><b>'+val+'</b></div><div class="bar"><i></i></div>';
       rows.appendChild(d);
